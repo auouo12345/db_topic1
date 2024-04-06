@@ -8,7 +8,7 @@
 
 3. 把 C:\xampp\htdocs\db_topic1\db 裡的.sql檔匯入你的sql
 
-4. 基本上打開 index.php 就會進到登入畫面了，我給的.sql裡面已經有一筆
+4. 基本上用瀏覽器打開 index.php 就會進到登入畫面了，我給的.sql裡面已經有一筆
    帳號：D1149754 密碼：123456 的資料，
    其他資訊直接在 phpMyAdmin 找了
 
