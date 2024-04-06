@@ -9,18 +9,16 @@
     </head>
 
     <body>
-        <h1>選課系統</h1>
+        <div class="title">
+            <h1>選課系統</h1>
+            <?php
+                session_start();
+                echo "<p>" . "目前登入帳號為 " . $_SESSION["name"] . "</p>";
+            ?>
+            <a href="php/logout.php"> <button>登出</button> </a>
+        </div>
 
-        <?php
-            session_start();
-            echo "<p>" . "目前登入帳號為 " . $_SESSION["name"] . "</p>";
-        ?>
-
-        <a href="php/logout.php">
-            <button>登出</button>
-        </a>
-
-        <div>
+        <div class="timeTable">
             <p>我的課表：</p>
             <table border="1">
                 <tr>
@@ -144,9 +142,8 @@
                     <td id="70"></td>
                 </tr>
             </table>
+            <?php include $_SERVER["DOCUMENT_ROOT"] . "/db_topic1/php/courseTable.php"; ?>
         </div>
-
-        <?php include $_SERVER["DOCUMENT_ROOT"] . "/db_topic1/php/courseTable.php"; ?>
 
         <div class="search">
             <p>搜尋課程：</p>
@@ -166,7 +163,14 @@
             </form>
         </div>
 
-
+        <div class="drop">
+            <p>退選課程：</p>
+            <form action="php/drop.php" method="post">
+                <p>課程代號：<input type="text" name="cid"></p>
+                <input type="hidden" name="drop">
+                <input type="submit" value="送出">
+            </form>
+        </div>
     </body>
 
 

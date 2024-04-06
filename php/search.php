@@ -10,7 +10,7 @@
 
         while($row = $result->fetch_assoc()) echo $row["name"] . " 課程代號：" . $row["cid"] . "<br>";
     }
-    else if($_POST["search"] == "") alert("搜尋欄不可為空");
+    //else if($_POST["search"] == "") alert("搜尋欄不可為空");
     else alert("Something wrong");
 
     $db_link->close();
@@ -18,5 +18,6 @@
     function alert($message)
     {
         echo "<script type='text/javascript'>alert('$message'); window.location.href = '../home.php'; </script>";
+        exit();
     }
 ?>

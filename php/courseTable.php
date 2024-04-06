@@ -5,9 +5,7 @@
 
     while ($row = $result->fetch_assoc())
     {
-        $sql = sprintf("SELECT * FROM course WHERE cid = '%s'" , $row["cid"]);
-        $courseInfo = $db_link->query($sql)->fetch_assoc();
-        $script = sprintf("<script>document.getElementById('%d').innerText = '%s';</script>" , $row["timeid"] , $courseInfo["name"]);
+        $script = sprintf("<script>document.getElementById('%d').innerHTML = '%s<br/>%s';</script>" , $row["timeid"] , $row["name"] , $row["cid"] );
         echo $script;
     }
 
