@@ -1,0 +1,53 @@
+<! DOCTYPE html>
+<html lang="zh-tw">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>註冊</title>
+</head>
+<body>
+    <h1>註冊</h1>
+
+    <div class="register">
+        <form action="php/register.php" method="post">
+            <p>學號 <input type="text" name="account"></p>
+            <p>密碼 <input type="password" name="password"></p>
+            <p>確認密碼 <input type="password" name="checkPassword"></p>
+            <p>姓名 <input type="text" name="name"></p>
+            <p>請選擇科系
+                <select name="dept">
+                    <option value="資訊">資訊</option>
+                    <option value="電機">電機</option>
+                </select>
+            </p>
+            <p>年級 <input type="number" name="grade"></p>
+            <input type="hidden" name="register">
+            <input type="submit" value="送出">
+        </form>
+    </div>
+
+    <script>
+        function check()
+        {
+            var account = document.forms["register"]["account"].value;
+            var password = document.forms["register"]["password"].value;
+            var checkPassword = document.forms["register"]["checkPassword"].value;
+
+            if(account.length !== 8)
+            {
+                alert("請輸入正確學號");
+                return false;
+            }
+            else if(password !== checkPassword)
+            {
+                alert("請確認密碼是否輸入正確");
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+</body>
+</html>
