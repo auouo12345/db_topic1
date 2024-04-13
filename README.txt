@@ -6,6 +6,8 @@
 
 2. 打開xampp，把 Apache 和 MySQL start
 
+3. 建一個叫 topic1 的 Database
+
 3. 把 C:\xampp\htdocs\db_topic1\db 裡的.sql檔匯入你的sql
 
 4. 基本上用瀏覽器打開 index.php 就會進到登入畫面了，我給的.sql裡面已經有一筆
