@@ -8,13 +8,14 @@
         $name = $_POST["name"];
         $dept = $_POST["dept"];
         $grade = $_POST["grade"];
+        $foreigner = $_POST["foreigner"];
         $credit = 0;
         $sql = sprintf("SELECT * FROM students WHERE sid = '%s'" , $account);
         $result = $db_link->query($sql);
 
         if($result->num_rows != 0) alert("學號已存在");
 
-        $sql = sprintf("INSERT INTO students (sid , name , dept , grade , password) VALUES ('%s' , '%s' , '%s' , %d , '%s')", $account , $name , $dept , $grade , $password);
+        $sql = sprintf("INSERT INTO students (sid , name , dept , grade , password , foreigner) VALUES ('%s' , '%s' , '%s' , %d , '%s' , %d)", $account , $name , $dept , $grade , $password , $foreigner);
         $db_link->query($sql);
         $sql = sprintf("SELECT * FROM course WHERE dept = '%s' AND grade = %d AND required = 1" , $dept , $grade);
         $result = $db_link->query($sql);

@@ -22,6 +22,10 @@
 
             echo "<br>";
         }
+
+        echo "<form action=\"../home.php\" method=\"post\"> 
+            <input type=\"submit\" value=\"返回首頁\"]>
+          </form>";
     }
     //else if($_POST["search"] == "") alert("搜尋欄不可為空");
     else alert("Something wrong");

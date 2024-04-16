@@ -11,18 +11,19 @@
     <h1>註冊</h1>
 
     <div class="register">
-        <form action="php/register.php" method="post">
-            <p>學號 <input type="text" name="account"></p>
-            <p>密碼 <input type="password" name="password"></p>
-            <p>確認密碼 <input type="password" name="checkPassword"></p>
-            <p>姓名 <input type="text" name="name"></p>
-            <p>請選擇科系
+        <form action="php/register.php" method="post" onsubmit="return check()">
+            <p>學號：<input type="text" name="account"></p>
+            <p>密碼：<input type="password" name="password"></p>
+            <p>確認密碼：<input type="password" name="checkPassword"></p>
+            <p>姓名：<input type="text" name="name"></p>
+            <p>請選擇科系：
                 <select name="dept">
                     <option value="資訊">資訊</option>
-                    <option value="電機">電機</option>
+                    <option value="外語">外語</option>
                 </select>
             </p>
-            <p>年級 <input type="number" name="grade"></p>
+            <p>年級：<input type="number" name="grade"></p>
+            <p>是否為外籍：是<input type="radio" name="foreigner" value="1"> 否<input type="radio" name="foreigner" value="0"></p>
             <input type="hidden" name="register">
             <input type="submit" value="送出">
         </form>
