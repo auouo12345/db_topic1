@@ -48,6 +48,7 @@
 //$db_link->close();
     if(isset($_POST["list"]))
     {
+        session_start();
         echo "<h1>" . "課程搜尋" . "</h1>";
         echo "<p>" . "搜尋結果：" . "</p>";
         $db_link = include "connect.php";

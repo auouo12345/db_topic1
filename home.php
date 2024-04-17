@@ -26,10 +26,6 @@
             font-size:20px;
         }
 
-        .title name{
-
-        }
-
         .title button{
             background-color:#fff;
             color: #446938;
@@ -102,7 +98,7 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             width:300px;
             position:absolute;
-            top:165px;
+            top:198px;
             left:0px;
         }
 
@@ -114,7 +110,7 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             width:300px;
             position:absolute;
-            top:370px;
+            top:449px;
             left:0px;
         }
 
@@ -126,7 +122,7 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             width:300px;
             position:absolute;
-            top:685px;
+            top:655px;
             left:0px;
         }
 
@@ -154,6 +150,88 @@
             -webkit-transfrom:scale(1.1);
             transform: scale(1.1);
             background-color: #2980b9;
+        }
+
+        input type="submit"
+        
+        /*from internet*/
+
+        *{        
+        box-sizing: border-box;
+        }
+        body {
+        margin: 0;
+        padding: 0;
+        }
+
+        .modal {
+        position: absolute;	
+        z-index: 10;		
+        display: none;
+        width: 100%;
+        height: 100%;
+        background: #6a6a6aa6;			
+        }
+
+        .dialog {		
+        position: absolute;
+        z-index: 11;
+        /* 將對話框水平置中。 */
+        left: 50%;	
+        transform: translate(-50%, 0%);			
+        top: -10px; /* 設定對話框的起始位置。 對話框滑動的距離與時間會影響淡入效果，可以自行嘗試調整。 */
+        opacity: 0; /* 將對話框設為透明。 */
+        display: none; /* 隱藏對話框。 */
+        width: 90%; /* 對話框寬度。 */
+        background: white;
+        box-shadow: 2px 2px 8px 1px rgba(0, 0, 0, 0.2);
+        border-radius: 10px;
+        line-height: 1.7em;
+        }
+
+        .titleSearch {
+        text-align: center;
+        padding: 8px;
+        font-size: 20px;
+        background: #1f7038ad;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        color: white;
+        border: 1px #f2e6e6 solid;
+        box-shadow: 0px 2px 8px 1px rgb(0 0 0 / 15%);
+        }
+
+        .content {
+        padding: 4px 8px;
+        }
+
+        .buttons {
+        /* 加上這兩個CSS，可以讓button移動到對話框下方。 */
+        /*position: absolute;
+        right: 0px;
+        */
+        text-align: right;
+        padding: 8px 14px;
+        }
+
+        .okBtn {
+        display: inline-block;
+        background: #092b68b3;
+        color: #ffffffeb;		    
+        border-radius: 8px;
+        border: 1px solid white;
+        padding: 4px 8px;
+        cursor: pointer;
+        }
+
+        .cancelBtn {
+        display: inline-block;
+        background: #e90202ad;
+        color: #ffffffeb;		    
+        border-radius: 8px;
+        border: 1px solid white;
+        padding: 4px 8px;
+        cursor: pointer;  
         }
     </style>
 </head>
@@ -296,22 +374,19 @@
 
         <div class="search">
             <p>搜尋課程：</p>
-            <form action="" method="post">
+            <form id="search" action="php/search.php" method="POST">
                 <p>課程名稱：<input type="text" name = "pattern"></p>
                 <input type="hidden" name="search">
-                <input type="submit" value="送出">
+                <input type="submit" class="searchSubmit" value="送出">
             </form>
-            <form action="" method="post">
+            <form id="list" action="php/list.php" method="post">
                 <input type="hidden" name="list">
-                <input type="submit" value="列出可選課程清單">
+                <input type="submit" class="searchSubmit" value="列出可選課程清單">
             </form>
         </div>
 
         <div class="addSelection">
             <p>加選課程：</p>
-            <!-- <form action="php/attention.php" method="post">
-                <input type="submit" value="關注課程清單">
-            </form> -->
             <form action="php/addSelection.php" method="post">
                 <p>課程代號：<input type="text" name="cid"></p>
                 <input type="hidden" name="addSelection">
@@ -328,11 +403,75 @@
             </form>
         </div>
 
-        <div class="searchResult">
-            <?php
-                include $_SERVER["DOCUMENT_ROOT"] . "/db_topic1/php/search.php";
-                include $_SERVER["DOCUMENT_ROOT"] . "/db_topic1/php/list.php";
-            ?>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+        <div class="modal"></div>
+            <div class="dialog">
+                <div class="titleSearch">搜尋</div>
+                <div class="content">
+                    <div id="searchResult"></div>
+                </div>
+                <div class="buttons">
+                    <div class="cancelBtn">關閉</div>
+            </div>
         </div>
+
+    <script>
+        $(".searchSubmit").click( function () {
+        $(".modal").css("display", "block"); // 顯示modal，遮住畫面背景。
+        $(".dialog").css("display", "block"); // 顯示dialog。
+        
+        $(".dialog").animate({			   
+            opacity: '1',
+            top: '50px' // 決定對話框要滑到哪個位置停止。		   
+        }, 550);
+        });
+
+        $(".cancelBtn").click( function () {
+        $(".dialog").animate({			   
+            opacity: '0',
+            top: '-50px' // 需與CSS設定的起始位置相同，以保證下次彈出視窗的效果相同。			   
+        }, 350, function () {
+            // 此區塊為callback function，會在動畫結束時被呼叫。
+            $(".modal").css("display", "none"); // 隱藏modal。
+            $(".dialog").css("display", "none"); // 隱藏dialog。
+        });
+        });
+
+
+        $("#search").submit(function(event) {
+            event.preventDefault(); // Prevent default action
+            var post_url = $(this).attr("action"); // Get form action URL
+            var request_method = $(this).attr("method"); // Get form GET/POST method
+            var form_data = new FormData(this); // Creates new FormData object
+            $.ajax({
+                url: post_url,
+                type: request_method,
+                data: form_data,
+                contentType: false,
+                cache: false,
+                processData: false
+            }).done(function (response) { //
+                $("#searchResult").html(response);
+            });
+        });
+
+        $("#list").submit(function(event){
+            event.preventDefault(); // Prevent default action
+            var post_url = $(this).attr("action"); // Get form action URL
+            var request_method = $(this).attr("method"); // Get form GET/POST method
+            var form_data = new FormData(this); // Creates new FormData object
+            $.ajax({
+                url : "php/list.php",
+                type: "post",
+                data : form_data,
+                contentType: false,
+                cache: false,
+                processData: false
+            }).done(function(response){ //
+                $("#searchResult").html(response);
+            });
+        });
+    </script>
     </body>
 </html>
