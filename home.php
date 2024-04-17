@@ -405,20 +405,19 @@
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-        <div class="modal"></div>
-            <div class="dialog">
-                <div class="titleSearch">搜尋</div>
-                <div class="content">
-                    <div id="searchResult"></div>
-                </div>
-                <div class="buttons">
-                    <div class="cancelBtn">關閉</div>
+        <div class="dialog">
+            <div class="titleSearch">搜尋</div>
+            <div class="content">
+                <div id="searchResult"></div>
+            </div>
+            <div class="buttons">
+                <div class="cancelBtn">關閉</div>
             </div>
         </div>
 
     <script>
         $(".searchSubmit").click( function () {
-        $(".modal").css("display", "block"); // 顯示modal，遮住畫面背景。
+        //$(".modal").css("display", "block"); // 顯示modal，遮住畫面背景。
         $(".dialog").css("display", "block"); // 顯示dialog。
         
         $(".dialog").animate({			   
