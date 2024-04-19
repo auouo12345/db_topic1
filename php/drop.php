@@ -19,13 +19,15 @@
         if($result->num_rows == 0) alert("未加選此課程");
 
         //(i) 退選後學分不可低於最低學分限制 (9 學分)；
-        //if($studentInfo["credit"] - $courseInfo["credit"] < 9) alert("退選後學分不可低於最低學分限制 (9 學分)");
+        if($studentInfo["credit"] - $courseInfo["credit"] < 9) alert("退選後學分不可低於最低學分限制 (9 學分)");
+
         $sql = sprintf("DELETE FROM course_selection WHERE sid = '%s' AND cid = %d" , $_SESSION["account"] , $_POST["cid"]);
         $db_link->query($sql);
         $sql = sprintf("DELETE FROM student_timetable WHERE sid = '%s' AND cid = %d" , $_SESSION["account"] , $_POST["cid"]);
         $db_link->query($sql);
         $sql = sprintf("UPDATE students SET credit = %d WHERE sid = '%s'" , $studentInfo["credit"] - $courseInfo["credit"] , $_SESSION["account"]);
         $db_link->query($sql);
+        $_SESSION["credit"] -= $courseInfo["credit"];
         if($result->fetch_assoc()["attention"] == 0)
         {
             $sql = sprintf("UPDATE course SET current_quantity = %d WHERE cid = %d" , $courseInfo["current_quantity"] - 1 , $_POST["cid"]);

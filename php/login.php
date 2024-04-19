@@ -20,6 +20,7 @@
                 $_SESSION["account"] = $account;
                 $_SESSION["name"] = $temp["name"];
                 $_SESSION["dept"] = $temp["dept"];
+                $_SESSION["credit"] = $temp["credit"];
                 header("location: ../home.php");
             }
             else alert("密碼錯誤");

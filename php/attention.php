@@ -35,6 +35,7 @@
         $db_link->query($sql);
         $sql = sprintf("UPDATE students SET credit = %d WHERE sid = '%s'" , $studentInfo["credit"] + $courseInfo["credit"] , $_SESSION["account"]);
         $db_link->query($sql);
+        $_SESSION["credit"] += $courseInfo["credit"];
         $sql = sprintf("SELECT * FROM course_timetable WHERE cid = %d" , $_POST["cid"]);
         $result = $db_link->query($sql);
 

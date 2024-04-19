@@ -86,7 +86,7 @@
         }
 
         th {
-            background-color: #f2f2f2;
+            background-color: ;
 
         }
 
@@ -143,6 +143,7 @@
 
         }
 
+
         input[type="submit"]:hover {
             opacity:1;
             -moz-transform: scale(1.1);
@@ -187,13 +188,14 @@
         box-shadow: 2px 2px 8px 1px rgba(0, 0, 0, 0.2);
         border-radius: 10px;
         line-height: 1.7em;
+        font-size: 16px;
         }
 
         .titleSearch {
         text-align: center;
         padding: 8px;
         font-size: 20px;
-        background: #1f7038ad;
+        background: #74905d;
         border-top-left-radius: 10px;
         border-top-right-radius: 10px;
         color: white;
@@ -203,36 +205,39 @@
 
         .content {
         padding: 4px 8px;
+        
         }
 
         .buttons {
-        /* 加上這兩個CSS，可以讓button移動到對話框下方。 */
-        /*position: absolute;
-        right: 0px;
-        */
         text-align: right;
         padding: 8px 14px;
         }
 
-        .okBtn {
-        display: inline-block;
-        background: #092b68b3;
-        color: #ffffffeb;		    
-        border-radius: 8px;
-        border: 1px solid white;
-        padding: 4px 8px;
-        cursor: pointer;
+        .cancelBtn {
+            display: inline-block;
+            background: #8e7437;
+            color: #ffffffeb;		    
+            border-radius: 8px;
+            border: 1px solid white;
+            padding: 4px 8px;
+            cursor: pointer;
+            position:absolute;
+            top:5px;
+            right:10px;
+            width:40px;
+            text-align: center;
+            border:none;
+            font-size:20px;  
         }
 
-        .cancelBtn {
-        display: inline-block;
-        background: #e90202ad;
-        color: #ffffffeb;		    
-        border-radius: 8px;
-        border: 1px solid white;
-        padding: 4px 8px;
-        cursor: pointer;  
+        .cancelBtn:hover{
+            opacity:1;
+            -moz-transform: scale(1.1);
+            -ms-transform: scale(1.1);
+            -webkit-transfrom:scale(1.1);
+            transform: scale(1.1);
         }
+
     </style>
 </head>
 
@@ -241,12 +246,15 @@
             <h1>選課系統</h1>
             <?php
             echo "<p>" . "目前登入帳號為: <strong style=' font-size: 20px; border-bottom: 2px solid white;'> " . $_SESSION["name"] . "</strong></p>";
+            //echo "<p>" . "目前已選學分:" . $_SESSION["credit"] . "</p>";
             ?>
             <a href="php/logout.php"> <button>登出</button> </a>
         </div>
 
         <div class="timeTable">
-            <p>已選學分數:</p>
+            <?php
+                echo "<p>" . "已選學分數:" . $_SESSION["credit"] . "</p>";
+            ?>
             <table border="1">
                 <tr>
                     <td></td>
@@ -406,10 +414,10 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
         <div class="dialog">
-            <div class="titleSearch">搜尋</div>
+            <div class="titleSearch">課程搜尋</div>
             <div class="content">
-                <div id="searchResult"></div>
-            </div>
+            <div id="searchResult"></div>
+                
             <div class="buttons">
                 <div class="cancelBtn">關閉</div>
             </div>
@@ -461,8 +469,8 @@
             var request_method = $(this).attr("method"); // Get form GET/POST method
             var form_data = new FormData(this); // Creates new FormData object
             $.ajax({
-                url : "php/list.php",
-                type: "post",
+                url : post_url,
+                type: request_method,
                 data : form_data,
                 contentType: false,
                 cache: false,
