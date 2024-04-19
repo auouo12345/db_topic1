@@ -154,10 +154,10 @@
         }
 
         input type="submit"
-        
+
         /*from internet*/
 
-        *{        
+        *{
         box-sizing: border-box;
         }
         body {
@@ -166,20 +166,20 @@
         }
 
         .modal {
-        position: absolute;	
-        z-index: 10;		
+        position: absolute;
+        z-index: 10;
         display: none;
         width: 100%;
         height: 100%;
-        background: #6a6a6aa6;			
+        background: #6a6a6aa6;
         }
 
-        .dialog {		
+        .dialog {
         position: absolute;
         z-index: 11;
         /* 將對話框水平置中。 */
-        left: 50%;	
-        transform: translate(-50%, 0%);			
+        left: 50%;
+        transform: translate(-50%, 0%);
         top: -10px; /* 設定對話框的起始位置。 對話框滑動的距離與時間會影響淡入效果，可以自行嘗試調整。 */
         opacity: 0; /* 將對話框設為透明。 */
         display: none; /* 隱藏對話框。 */
@@ -205,7 +205,7 @@
 
         .content {
         padding: 4px 8px;
-        
+
         }
 
         .buttons {
@@ -216,7 +216,7 @@
         .cancelBtn {
             display: inline-block;
             background: #8e7437;
-            color: #ffffffeb;		    
+            color: #ffffffeb;
             border-radius: 8px;
             border: 1px solid white;
             padding: 4px 8px;
@@ -227,7 +227,7 @@
             width:40px;
             text-align: center;
             border:none;
-            font-size:20px;  
+            font-size:20px;
         }
 
         .cancelBtn:hover{
@@ -246,14 +246,13 @@
             <h1>選課系統</h1>
             <?php
             echo "<p>" . "目前登入帳號為: <strong style=' font-size: 20px; border-bottom: 2px solid white;'> " . $_SESSION["name"] . "</strong></p>";
-            //echo "<p>" . "目前已選學分:" . $_SESSION["credit"] . "</p>";
             ?>
             <a href="php/logout.php"> <button>登出</button> </a>
         </div>
 
         <div class="timeTable">
             <?php
-                echo "<p>" . "已選學分數:" . $_SESSION["credit"] . "</p>";
+            echo "<p>" . "已選學分數:" . $_SESSION["credit"] . "</p>";
             ?>
             <table border="1">
                 <tr>
@@ -383,13 +382,13 @@
         <div class="search">
             <p>搜尋課程：</p>
             <form id="search" action="php/search.php" method="POST">
-                <p>課程名稱：<input type="text" name = "pattern"></p>
+                <p>課程名稱：<input id="pattern" type="text" name="pattern"></p>
                 <input type="hidden" name="search">
                 <input type="submit" class="searchSubmit" value="送出">
             </form>
             <form id="list" action="php/list.php" method="post">
                 <input type="hidden" name="list">
-                <input type="submit" class="searchSubmit" value="列出可選課程清單">
+                <input type="submit" class="listSubmit" value="列出可選課程清單">
             </form>
         </div>
 
@@ -403,7 +402,7 @@
         </div>
 
         <div class="drop">
-            <p>退選課程：</p>
+            <p>退選/取消關注：</p>
             <form action="php/drop.php" method="post">
                 <p>課程代號：<input type="text" name="cid"></p>
                 <input type="hidden" name="drop">
@@ -417,68 +416,80 @@
             <div class="titleSearch">課程搜尋</div>
             <div class="content">
             <div id="searchResult"></div>
-                
+
             <div class="buttons">
                 <div class="cancelBtn">關閉</div>
             </div>
         </div>
 
-    <script>
-        $(".searchSubmit").click( function () {
-        //$(".modal").css("display", "block"); // 顯示modal，遮住畫面背景。
-        $(".dialog").css("display", "block"); // 顯示dialog。
-        
-        $(".dialog").animate({			   
-            opacity: '1',
-            top: '50px' // 決定對話框要滑到哪個位置停止。		   
-        }, 550);
-        });
+        <script>
+            $(".searchSubmit").click(function () {
+                if($("#pattern").val().length > 0) {
+                    //$(".modal").css("display", "block"); // 顯示modal，遮住畫面背景。
+                    $(".dialog").css("display", "block"); // 顯示dialog。
 
-        $(".cancelBtn").click( function () {
-        $(".dialog").animate({			   
-            opacity: '0',
-            top: '-50px' // 需與CSS設定的起始位置相同，以保證下次彈出視窗的效果相同。			   
-        }, 350, function () {
-            // 此區塊為callback function，會在動畫結束時被呼叫。
-            $(".modal").css("display", "none"); // 隱藏modal。
-            $(".dialog").css("display", "none"); // 隱藏dialog。
-        });
-        });
-
-
-        $("#search").submit(function(event) {
-            event.preventDefault(); // Prevent default action
-            var post_url = $(this).attr("action"); // Get form action URL
-            var request_method = $(this).attr("method"); // Get form GET/POST method
-            var form_data = new FormData(this); // Creates new FormData object
-            $.ajax({
-                url: post_url,
-                type: request_method,
-                data: form_data,
-                contentType: false,
-                cache: false,
-                processData: false
-            }).done(function (response) { //
-                $("#searchResult").html(response);
+                    $(".dialog").animate({
+                        opacity: '1',
+                        top: '50px' // 決定對話框要滑到哪個位置停止。
+                    }, 550);
+                }
             });
-        });
 
-        $("#list").submit(function(event){
-            event.preventDefault(); // Prevent default action
-            var post_url = $(this).attr("action"); // Get form action URL
-            var request_method = $(this).attr("method"); // Get form GET/POST method
-            var form_data = new FormData(this); // Creates new FormData object
-            $.ajax({
-                url : post_url,
-                type: request_method,
-                data : form_data,
-                contentType: false,
-                cache: false,
-                processData: false
-            }).done(function(response){ //
-                $("#searchResult").html(response);
+            $(".listSubmit").click(function () {
+                //$(".modal").css("display", "block"); // 顯示modal，遮住畫面背景。
+                $(".dialog").css("display", "block"); // 顯示dialog。
+
+                $(".dialog").animate({
+                    opacity: '1',
+                    top: '50px' // 決定對話框要滑到哪個位置停止。
+                }, 550);
             });
-        });
-    </script>
+
+            $(".cancelBtn").click(function () {
+                $(".dialog").animate({
+                    opacity: '0',
+                    top: '-50px' // 需與CSS設定的起始位置相同，以保證下次彈出視窗的效果相同。
+                }, 350, function () {
+                    // 此區塊為callback function，會在動畫結束時被呼叫。
+                    $(".modal").css("display", "none"); // 隱藏modal。
+                    $(".dialog").css("display", "none"); // 隱藏dialog。
+                });
+            });
+
+
+            $("#search").submit(function(event) {
+                event.preventDefault(); // Prevent default action
+                var post_url = $(this).attr("action"); // Get form action URL
+                var request_method = $(this).attr("method"); // Get form GET/POST method
+                var form_data = new FormData(this); // Creates new FormData object
+                $.ajax({
+                    url: post_url,
+                    type: request_method,
+                    data: form_data,
+                    contentType: false,
+                    cache: false,
+                    processData: false
+                }).done(function (response) { //
+                    $("#searchResult").html(response);
+                });
+            });
+
+            $("#list").submit(function(event){
+                event.preventDefault(); // Prevent default action
+                var post_url = $(this).attr("action"); // Get form action URL
+                var request_method = $(this).attr("method"); // Get form GET/POST method
+                var form_data = new FormData(this); // Creates new FormData object
+                $.ajax({
+                    url : post_url,
+                    type: request_method,
+                    data : form_data,
+                    contentType: false,
+                    cache: false,
+                    processData: false
+                }).done(function(response){ //
+                    $("#searchResult").html(response);
+                });
+            });
+        </script>
     </body>
 </html>

@@ -176,6 +176,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+
         }
 
         .login label {
@@ -207,6 +208,38 @@
             border: none; /* Remove border for a cleaner look */
             border-radius: 5px; /* Consistent with other elements */
         }
+
+        .register button[name="register"]{
+            background-color: #3498db;
+            position:relative;
+            left:190px;
+            top:10px;
+            color: #fff;
+            display:block;
+            height:25px;
+            line-height:10px;
+            opacity: 0.9;
+            border:none;
+            border-radius:5px;
+            cursor:pointer;
+            text-decoration: none;
+            align-items: center;
+            -moz-tansition: all 0.2s ease-in-out;
+            -ms-transition: all 0.2s ease-in-out;
+            -webkit-transition: all 0.2s ease-in-out;
+            transition: all 0.2s ease-in-out;
+        }
+
+        button[name='register']:hover{
+            opacity:1.5;
+            -moz-transform: scale(1.1);
+            -ms-transform: scale(1.1);
+            -webkit-transfrom:scale(1.1);
+            transform: scale(1.05);
+            background-color: #2980b9;
+        }
+
+        a {text-decoration: none;}
 
         .login_inner{
             display:block;
@@ -266,9 +299,11 @@
             <input type="submit" value="送出">
         </span>
     </form>
-    <a href="register.html">
-        <button name="register">註冊</button>
-    </a>
+    <div class="register">
+        <a href="register.html">
+            <button name="register">註冊</button>
+        </a>
+    </div>
 </div>
 
 <!-- JavaScript部分 -->
