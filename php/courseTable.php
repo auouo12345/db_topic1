@@ -16,8 +16,8 @@ for ($i = 1; $i <= 70; $i++) {
 //--輸出課表
 while ($row = $result->fetch_assoc()) {
     //--依照是否關注更改課表顏色
-    if ($row["attention"] == 0) $script = sprintf("<script>document.getElementById('%d').style = 'background-color:green'</script>", $row["timeid"]);
-    else $script = sprintf("<script>document.getElementById('%d').style = 'background-color:orange'</script>", $row["timeid"]);
+    if ($row["attention"] == 0) $script = sprintf("<script>document.getElementById('%d').style = 'background-color:#CEFFCE'</script>", $row["timeid"]);
+    else $script = sprintf("<script>document.getElementById('%d').style = 'background-color:#FFE66F'</script>", $row["timeid"]);
 
     echo $script;
     //--

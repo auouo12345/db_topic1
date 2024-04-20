@@ -29,7 +29,7 @@
             position: center;
             left: 50px;
             width:50px;
-            background: #87cefa                        ;
+            background: #87cefa;                        ;
             animation-name:oxxo;
             animation-duration:2s;
             color: white; /* Light color for better contrast with background */
@@ -73,102 +73,21 @@
         }
 
         .clock {
-            color: skyblue;
             font-family: "UD Shin Go Light", sans-serif;
-            font-size: 46px;
+            font-size: 90px;
             position:fixed;
-            animation-name: fadeIn;
-            bottom: 550px;
-            right: 20px;
-            animation:clockFadeIn 1s ease;
-        }
-
-        .clock .frame {
-            border: 3px solid #7c785a;
-            border-radius: 50px;
-            display: block;
-            height: 94px;
-            margin: 0 auto 5px auto;
-            position: relative;
-            width: 94px;
-            background-color: white;
-        }
-
-        .clock .frame:after {
-            background: #7c785a;
-            border-radius: 5px;
-            content: "";
-            display: block;
-            height: 10px;
-            left: 42px;
-            position: absolute;
-            top: 42px;
-            width: 10px;
-
-        }
-
-        .clock .frame div {
-            border-radius: 3px;
-            display: block;
-            height: 72px;
-            margin: 0;
-            padding: 0;
-            position: absolute;
-            width: 3px;
-        }
-
-        .clock .hour {
-            background: -moz-linear-gradient(top, #fff,
-            #fff 10%,
-            #7c785a 10%,
-            #7c785a 52%,
-            #fff 52%,
-            #fff);
-            background: -webkit-gradient(linear,
-            left top,
-            left bottom,
-            from(#fff),
-            color-stop(0.1, #fff),
-            color-stop(0.1, #7c785a),
-            color-stop(0.52, #7c785a),
-            color-stop(0.52, #fff),
-            to(#fff));
-            left: 45px;
-            top: 11px;
-            -moz-transform: rotate(150deg);
-            -webkit-transform: rotate(150deg);
-            -ms-transform: rotate(150deg);
-            transform: rotate(150deg);
-
-        }
-
-        .clock .minute {
-            background: -moz-linear-gradient(top, #7c785a,
-            #7c785a 52%,
-            #fff 52%,
-            #fff);
-            background: -webkit-gradient(linear,
-            left top,
-            left bottom,
-            from(#7c785a),
-            color-stop(0.52, #7c785a),
-            color-stop(0.52, #fff),
-            to(#fff));
-            left: 45px;
-            top: 11px;
-            -moz-transform: rotate(calc((360deg / 60) * new Date().getMinutes()));
-            -ms-transform: rotate(calc((360deg / 60) * new Date().getMinutes()));
-            -webkit-transform: rotate(calc((360deg / 60) * new Date().getMinutes()));
-            transform: rotate(calc((360deg / 60) * new Date().getMinutes()));
+            top: 80px;
+            right: 90px;
+            animation: fadeIn 1s ease;
         }
 
         .clock .time {
             text-align: center;
-            color:white;
+            color:rgb(255, 255, 255);
         }
 
         .clock .time .unit {
-            font-size: 28px;
+            font-size: 8px;
             margin: 0 5px;
         }
 
@@ -280,10 +199,10 @@
 
 <!-- 時鐘部分 -->
 <div class="clock">
-    <div class="frame">
+    <!-- <div class="frame">
         <div class="hour"></div>
         <div class="minute"></div>
-    </div>
+    </div> -->
     <div class="time"></div>
 </div>
 
