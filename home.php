@@ -1,247 +1,15 @@
-<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="zh-tw">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>選課系統</title>
-    <style>
-        body {
-            font-family: "Helvetica", "Arial","LiHei Pro","黑體-繁","微軟正黑體", sans-serif;
-            background-color: #d3fbff;
-            color: #333;
-            margin: 0;
-            padding: 0;
-            animation-name:oxxo;
-            animation-duration:1.5s;
-            font-weight:bold;
-        }
-
-        .title {
-            background-color: #4e72b8;
-            color: #fff;
-            padding: 10px;
-            text-align: center;
-            font-weight:bold;
-            font-size:20px;
-        }
-
-        .title button{
-            background-color:#fff;
-            color: #446938;
-            font-weight:bold;
-            font-size:14px;
-            cursor: pointer;
-            border: none;
-            border-radius: 3px;
-            animation-name:oxxo;
-            transition: all 0.3s ease-in-out;
-        }
-
-        .title button:hover{
-            transform: scale(1.1);
-            opacity:1;
-            -moz-transform: scale(1.1);
-            -ms-transform: scale(1.1);
-            -webkit-transfrom:scale(1.1);
-            background-color: #afb4db;
-        }
-
-        @keyframes oxxo{
-            from{
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to{
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-
-        .timeTable {
-            background-color: #fff;
-            padding: 20px;
-            margin: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            left:350px;
-            position: relative;
-            width:1100px;
-        }
-
-        table {
-            width: 1100px;
-            border-collapse: collapse;
-            margin-top: 20px;
-            table-layout:fixed;
-            word-wrap:break-word;
-        }
-
-        th, td {
-            padding: 10px;
-            text-align: center;
-            border: 1px solid #ccc;
-
-        }
-
-        th {
-            background-color: ;
-
-        }
-
-        .search {
-            background-color: #fff;
-            padding: 20px;
-            margin: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width:300px;
-            position:absolute;
-            top:198px;
-            left:0px;
-        }
-
-        .addSelection{
-            background-color: #fff;
-            padding: 20px;
-            margin: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width:300px;
-            position:absolute;
-            top:449px;
-            left:0px;
-        }
-
-        .drop{
-            background-color: #fff;
-            padding: 20px;
-            margin: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width:300px;
-            position:absolute;
-            top:655px;
-            left:0px;
-        }
-
-        input[type="text"], input[type="submit"] {
-            padding: 8px;
-            margin-bottom: 10px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            animation-name:oxxo;
-            transition: all 0.3s ease-in-out;
-        }
-
-        input[type="submit"] {
-            background-color: #3498db;
-            color: #fff;
-            cursor: pointer;
-            font-weight:bold;
-
-        }
-
-
-        input[type="submit"]:hover {
-            opacity:1;
-            -moz-transform: scale(1.1);
-            -ms-transform: scale(1.1);
-            -webkit-transfrom:scale(1.1);
-            transform: scale(1.1);
-            background-color: #2980b9;
-        }
-
-        input type="submit"
-
-        /*from internet*/
-
-        *{
-        box-sizing: border-box;
-        }
-        body {
-        margin: 0;
-        padding: 0;
-        }
-
-        .modal {
-        position: absolute;
-        z-index: 10;
-        display: none;
-        width: 100%;
-        height: 100%;
-        background: #6a6a6aa6;
-        }
-
-        .dialog {
-        position: absolute;
-        z-index: 11;
-        /* 將對話框水平置中。 */
-        left: 50%;
-        transform: translate(-50%, 0%);
-        top: -10px; /* 設定對話框的起始位置。 對話框滑動的距離與時間會影響淡入效果，可以自行嘗試調整。 */
-        opacity: 0; /* 將對話框設為透明。 */
-        display: none; /* 隱藏對話框。 */
-        width: 90%; /* 對話框寬度。 */
-        background: white;
-        box-shadow: 2px 2px 8px 1px rgba(0, 0, 0, 0.2);
-        border-radius: 10px;
-        line-height: 1.7em;
-        font-size: 16px;
-        }
-
-        .titleSearch {
-        text-align: center;
-        padding: 8px;
-        font-size: 20px;
-        background: #74905d;
-        border-top-left-radius: 10px;
-        border-top-right-radius: 10px;
-        color: white;
-        border: 1px #f2e6e6 solid;
-        box-shadow: 0px 2px 8px 1px rgb(0 0 0 / 15%);
-        }
-
-        .content {
-        padding: 4px 8px;
-
-        }
-
-        .buttons {
-        text-align: right;
-        padding: 8px 14px;
-        }
-
-        .cancelBtn {
-            display: inline-block;
-            background: #8e7437;
-            color: #ffffffeb;
-            border-radius: 8px;
-            border: 1px solid white;
-            padding: 4px 8px;
-            cursor: pointer;
-            position:absolute;
-            top:5px;
-            right:10px;
-            width:40px;
-            text-align: center;
-            border:none;
-            font-size:20px;
-        }
-
-        .cancelBtn:hover{
-            opacity:1;
-            -moz-transform: scale(1.1);
-            -ms-transform: scale(1.1);
-            -webkit-transfrom:scale(1.1);
-            transform: scale(1.1);
-        }
-
-    </style>
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>選課系統</title>
+        <link rel="stylesheet" href="css/home.css">
+    </head>
 
     <body>
+        <?php session_start(); ?>
+
         <div class="title">
             <h1>選課系統</h1>
             <?php
@@ -254,7 +22,7 @@
             <?php
             echo "<p>" . "已選學分數:" . $_SESSION["credit"] . "</p>";
             ?>
-            <table border="1">
+            <table>
                 <tr>
                     <td></td>
                     <td>星期一</td>
@@ -410,8 +178,6 @@
             </form>
         </div>
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
         <div class="dialog">
             <div class="titleSearch">課程搜尋</div>
             <div class="content">
@@ -422,74 +188,7 @@
             </div>
         </div>
 
-        <script>
-            $(".searchSubmit").click(function () {
-                if($("#pattern").val().length > 0) {
-                    //$(".modal").css("display", "block"); // 顯示modal，遮住畫面背景。
-                    $(".dialog").css("display", "block"); // 顯示dialog。
-
-                    $(".dialog").animate({
-                        opacity: '1',
-                        top: '50px' // 決定對話框要滑到哪個位置停止。
-                    }, 550);
-                }
-            });
-
-            $(".listSubmit").click(function () {
-                //$(".modal").css("display", "block"); // 顯示modal，遮住畫面背景。
-                $(".dialog").css("display", "block"); // 顯示dialog。
-
-                $(".dialog").animate({
-                    opacity: '1',
-                    top: '50px' // 決定對話框要滑到哪個位置停止。
-                }, 550);
-            });
-
-            $(".cancelBtn").click(function () {
-                $(".dialog").animate({
-                    opacity: '0',
-                    top: '-50px' // 需與CSS設定的起始位置相同，以保證下次彈出視窗的效果相同。
-                }, 350, function () {
-                    // 此區塊為callback function，會在動畫結束時被呼叫。
-                    $(".modal").css("display", "none"); // 隱藏modal。
-                    $(".dialog").css("display", "none"); // 隱藏dialog。
-                });
-            });
-
-
-            $("#search").submit(function(event) {
-                event.preventDefault(); // Prevent default action
-                var post_url = $(this).attr("action"); // Get form action URL
-                var request_method = $(this).attr("method"); // Get form GET/POST method
-                var form_data = new FormData(this); // Creates new FormData object
-                $.ajax({
-                    url: post_url,
-                    type: request_method,
-                    data: form_data,
-                    contentType: false,
-                    cache: false,
-                    processData: false
-                }).done(function (response) { //
-                    $("#searchResult").html(response);
-                });
-            });
-
-            $("#list").submit(function(event){
-                event.preventDefault(); // Prevent default action
-                var post_url = $(this).attr("action"); // Get form action URL
-                var request_method = $(this).attr("method"); // Get form GET/POST method
-                var form_data = new FormData(this); // Creates new FormData object
-                $.ajax({
-                    url : post_url,
-                    type: request_method,
-                    data : form_data,
-                    contentType: false,
-                    cache: false,
-                    processData: false
-                }).done(function(response){ //
-                    $("#searchResult").html(response);
-                });
-            });
-        </script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="js/home.js"></script>
     </body>
 </html>

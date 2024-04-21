@@ -58,6 +58,8 @@ if (isset($_POST["register"])) {
     exit();
 }
 
+$db_link->close();
+
 function alert($message) {
     echo "<script type='text/javascript'>alert('$message'); window.location.href = '../register.html'; </script>";
     exit();

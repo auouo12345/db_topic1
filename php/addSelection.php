@@ -53,9 +53,9 @@ if (isset($_POST["addSelection"])) {
     if ($courseInfo["max_quantity"] <= $courseInfo["current_quantity"]) {
         //--預先準備好form，根據confirm判斷是否POST給attention.php
         echo "<form id = 'attention' method='POST' action='attention.php'>
-                    <input type='hidden' name='cid' value='" . $_POST["cid"] . "'>
-                    <input type='hidden' name='attention'>
-                  </form>";
+                <input type='hidden' name='cid' value='" . $_POST["cid"] . "'>
+                <input type='hidden' name='attention'>
+              </form>";
         confirm();
         //--
     }

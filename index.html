@@ -1,250 +1,44 @@
 <!DOCTYPE html>
 <html lang="zh-tw">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>大學選課系統</title>
-    <style>
-        body {
-            background-image: url("https://hips.hearstapps.com/hmg-prod/images/berry-college-historic-campus-at-twilight-royalty-free-image-1652127954.jpg"); /* Replace with your background image */
-            background-size: cover;
-            background-position: center;
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>大學選課系統</title>
+        <link rel="stylesheet" href="css/index.css">
+    </head>
 
-        .login {
-            background-color: #d3fbff;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
-            animation: fadeIn 1s ease;
-        }
+    <body>
+        <h1>登入</h1>
 
-        h1 {
-            position: center;
-            left: 50px;
-            width:50px;
-            background: #87cefa;                        ;
-            animation-name:oxxo;
-            animation-duration:2s;
-            color: white; /* Light color for better contrast with background */
-            font-size: 3em; /* Increase font size for emphasis */
-            margin-bottom: 20px;
-            padding:20px;
-            border-radius:5px;
-        }
+        <!-- 時鐘部分 -->
+        <div class="clock">
+            <!-- <div class="frame">
+                <div class="hour"></div>
+                <div class="minute"></div>
+            </div> -->
+            <div class="time"></div>
+        </div>
 
-        @keyframes oxxo{
-            from{
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to{
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+        <!-- 登入表單 -->
+        <div class="login">
+            <form action="php/login.php" method="post">
+                <label for="account">帳號</label>
+                <input type="text" id="account" name="account">
+                <label for="password">密碼</label>
+                <input type="password" id="password" name="password">
+                <input type="hidden" name="login">
+                <span class="login_inner">
+                    <input type="submit" value="送出">
+                </span>
+            </form>
+            <div class="register">
+                <a href="register.html">
+                    <button name="register">註冊</button>
+                </a>
+            </div>
+        </div>
 
-        @keyframes fadeIn {
-            0% {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes clockFadeIn {
-            from{
-                opacity: 0;
-                transiform: translateY(-20px);
-            }
-            to{
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .clock {
-            font-family: "UD Shin Go Light", sans-serif;
-            font-size: 90px;
-            position:fixed;
-            top: 80px;
-            right: 90px;
-            animation: fadeIn 1s ease;
-        }
-
-        .clock .time {
-            text-align: center;
-            color:rgb(255, 255, 255);
-        }
-
-        .clock .time .unit {
-            font-size: 8px;
-            margin: 0 5px;
-        }
-
-        .login form {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-
-        }
-
-        .login label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold; /* Emphasize labels */
-            font-size:20px;
-            color: #333;
-        }
-
-        .login input[type="text"],
-        .login input[type="password"] {
-            width: 200px; /* Adjust width as needed */
-            padding: 10px;
-            font-size:15px;
-            margin: 5px 0;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            transition: all 0.3s ease;
-        }
-
-        .login input[type="submit"] {
-            background-color: #3498db;
-            color: #fff;
-            font-weight: bold;
-            font-size:20px;
-            cursor: pointer;
-            padding: 5px 15px; /* Adjust padding for a better button shape */
-            border: none; /* Remove border for a cleaner look */
-            border-radius: 5px; /* Consistent with other elements */
-        }
-
-        .register button[name="register"]{
-            background-color: #3498db;
-            position:relative;
-            left:190px;
-            top:10px;
-            color: #fff;
-            display:block;
-            height:25px;
-            line-height:10px;
-            opacity: 0.9;
-            border:none;
-            border-radius:5px;
-            cursor:pointer;
-            text-decoration: none;
-            align-items: center;
-            -moz-tansition: all 0.2s ease-in-out;
-            -ms-transition: all 0.2s ease-in-out;
-            -webkit-transition: all 0.2s ease-in-out;
-            transition: all 0.2s ease-in-out;
-        }
-
-        button[name='register']:hover{
-            opacity:1.5;
-            -moz-transform: scale(1.1);
-            -ms-transform: scale(1.1);
-            -webkit-transfrom:scale(1.1);
-            transform: scale(1.05);
-            background-color: #2980b9;
-        }
-
-        a {text-decoration: none;}
-
-        .login_inner{
-            display:block;
-            height:34px;
-            line-height:56px;
-            opacity: 0.9;
-            -moz-tansition: all 0.2s ease-in-out;
-            -ms-transition: all 0.2s ease-in-out;
-            -webkit-transition: all 0.2s ease-in-out;
-            transition: all 0.2s ease-in-out;
-        }
-
-        .login.hover .login_inner,
-        .login:hover .login_inner{
-            opacity:1;
-            -moz-transform: scale(1.1);
-            -ms-transform: scale(1.1);
-            -webkit-transfrom:scale(1.1);
-            transform: scale(1.1);
-        }
-
-        .login input[type="submit"]:hover {
-            background-color: #2980b9;
-        }
-
-        @keyframes clockRotate{
-            from {
-                transfrom: rotate(0deg);
-            }
-            to{
-                transfrorm: rotate(360deg);
-            }
-        }
-    </style>
-</head>
-<body>
-<h1>登入</h1>
-
-<!-- 時鐘部分 -->
-<div class="clock">
-    <!-- <div class="frame">
-        <div class="hour"></div>
-        <div class="minute"></div>
-    </div> -->
-    <div class="time"></div>
-</div>
-
-<!-- 登入表單 -->
-<div class="login">
-    <form action="php/login.php" method="post">
-        <label for="account">帳號</label>
-        <input type="text" id="account" name="account">
-        <label for="password">密碼</label>
-        <input type="password" id="password" name="password">
-        <input type="hidden" name="login">
-        <span class="login_inner">
-            <input type="submit" value="送出">
-        </span>
-    </form>
-    <div class="register">
-        <a href="register.html">
-            <button name="register">註冊</button>
-        </a>
-    </div>
-</div>
-
-<!-- JavaScript部分 -->
-<script>
-    function updateTime() {
-        const now = new Date();
-        const hours = now.getHours().toString().padStart(2, '0');
-        const minutes = now.getMinutes().toString().padStart(2, '0');
-        const timeString = `${hours}<span class="unit">:</span>${minutes}<span class="unit"></span>`;
-        document.querySelector('.clock .time').innerHTML = timeString;
-    }
-
-    updateTime(); // 頁面載入時更新時間
-    setInterval(updateTime, 1000); // 每秒更新一次時間
-
-    const clockFrame = document.querySelector('.clock .frame');
-    setInterval(() => {
-        const hoursRotation = `rotate(calc((360deg / 12) * (new Date().getHours() % 12) + (360deg / 12) * (new Date().getMinutes() / 60)))`;
-        const minutesRotation = `rotate(calc((360deg / 60) * new Date().getMinutes()))`;
-        clockFrame.querySelector('.hour').style.transform = hoursRotation;
-        clockFrame.querySelector('.minute').style.transform = minutesRotation;
-    }, 1000);
-</script>
-</body>
+        <!-- JavaScript部分 -->
+        <script src="js/index.js"></script>
+    </body>
 </html>
