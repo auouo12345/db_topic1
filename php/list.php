@@ -98,7 +98,7 @@ if (isset($_POST["list"])) {
 
     while ($row = $result->fetch_assoc()) {
         //--處理搜尋結果，照格式輸出
-        echo "<p><span style='font-size: 1.2em; color: #32a852;'>{$row["name"]}</span> {$row["dept"]}系 {$row["grade"]}年級 目前人數 / 最大人數：{$row["current_quantity"]} / {$row["max_quantity"]}</p>";
+        echo "<p><span style='font-size: 1.2em; color: #32a852;'>{$row["name"]}</span> {$row["dept"]}系{$row["grade"]}年級 目前人數 / 最大人數：{$row["current_quantity"]} / {$row["max_quantity"]}</p>";
         echo "<p>課程代號：{$row["cid"]}";
         $sql = sprintf("SELECT * FROM course_timetable WHERE cid = %d ORDER BY timeid", $row["cid"]);
         $timetable = $db_link->query($sql);
